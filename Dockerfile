@@ -6,4 +6,5 @@ LABEL "com.github.actions.icon"="git-commit"
 LABEL "com.github.actions.color"="blue"
 
 COPY mirror.sh /mirror.sh
+COPY get-password.sh /get-password.sh
 ENTRYPOINT ["/bin/sh", "/mirror.sh"]
