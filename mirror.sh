@@ -7,7 +7,7 @@ git config --global credential.helper cache
 git remote add mirror ${GITLAB_REPOSITORY}
 
 if test "$GITHUB_EVENT_NAME" == "push" -o "$GITHUB_EVENT_NAME" == "create"; then
-  git push mirror ${GITHUB_REF}
+  git push mirror ${GITHUB_REF}:${GITHUB_REF}
 elif test "$GITHUB_EVENT_NAME" == "delete"; then
   git push mirror :${GITHUB_REF}
 else
