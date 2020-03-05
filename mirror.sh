@@ -3,6 +3,7 @@
 set -euo pipefail
 
 git config --global credential.username $GITLAB_USERNAME
+git config --global core.askPass /get-password.sh
 git config --global credential.helper cache
 git remote add mirror ${GITLAB_REPOSITORY}
 
