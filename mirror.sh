@@ -9,3 +9,6 @@ echo "done env"
 git config --global credential.username $GITLAB_USERNAME
 git config --global credential.helper cache
 git remote add mirror ${GITLAB_REPOSITORY}
+
+echo "Failing on purpose"
+exit 1
