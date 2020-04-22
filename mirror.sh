@@ -7,7 +7,11 @@ git config --global core.askPass /get-password.sh
 git config --global credential.helper cache
 git remote add mirror ${GITLAB_REPOSITORY}
 
-if test "$GITHUB_EVENT_NAME" == "push" -o "$GITHUB_EVENT_NAME" == "create"; then
+if test "$GITHUB_EVENT_NAME" == "create"; then
+    # Do nothing. Every "create" event *also* publishes a *push* event, even tags/branches created from github UI.
+    # Duplicate events would race and sometimes cause spurious errors.
+    echo "Ignoring create event, because the push event will handle updates."
+elif test "$GITHUB_EVENT_NAME" == "push"; then
   git push mirror ${GITHUB_REF}:${GITHUB_REF} --force
 elif test "$GITHUB_EVENT_NAME" == "delete"; then
   if test "$DELETED_REF_TYPE" == "tag"; then
