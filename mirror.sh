@@ -14,6 +14,10 @@ elif test "$GITHUB_EVENT_NAME" == "push"; then
   git remote add mirror ${GITLAB_REPOSITORY}
   git push mirror ${GITHUB_REF}:${GITHUB_REF} --force
   git remote remove mirror
+elif test "$GITHUB_EVENT_NAME" == "workflow_run" -a "$GITHUB_ACTOR" == "dependabot[bot]"; then
+  git remote add mirror ${GITLAB_REPOSITORY}
+  git push mirror ${GITHUB_REF}:${GITHUB_REF} --force
+  git remote remove mirror
 elif test "$GITHUB_EVENT_NAME" == "delete"; then
   if test "$DELETED_REF_TYPE" == "tag"; then
     FULL_DELETED_REF="refs/tags/$DELETED_REF"
