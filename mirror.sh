@@ -14,7 +14,7 @@ elif test "$GITHUB_EVENT_NAME" == "push"; then
   git remote add mirror ${GITLAB_REPOSITORY}
   git push mirror ${GITHUB_REF}:${GITHUB_REF} --force
   git remote remove mirror
-elif test "$GITHUB_EVENT_NAME" == "workflow_run" -a "$GITHUB_ACTOR" == "dependabot[bot]"; then
+elif test "$GITHUB_EVENT_NAME" == "workflow_run"; then
   git remote add mirror ${GITLAB_REPOSITORY}
   git push mirror ${GITHUB_REF}:${GITHUB_REF} --force
   git remote remove mirror
