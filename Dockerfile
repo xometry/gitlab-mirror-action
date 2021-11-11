@@ -1,4 +1,4 @@
-FROM 694713800774.dkr.ecr.us-east-2.amazonaws.com/alpine/git:latest
+FROM alpine/git:latest
 
 LABEL "com.github.actions.name"="Mirror to GitLab"
 LABEL "com.github.actions.description"="Mirror branch and tag pushes to GitLab."
