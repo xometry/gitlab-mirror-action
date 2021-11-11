@@ -1,4 +1,4 @@
-FROM alpine/git:latest
+FROM public.ecr.aws/m7u4n3p6/alpine/git:latest
 
 LABEL "com.github.actions.name"="Mirror to GitLab"
 LABEL "com.github.actions.description"="Mirror branch and tag pushes to GitLab."
