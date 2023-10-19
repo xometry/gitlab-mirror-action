@@ -1,4 +1,4 @@
-FROM public.ecr.aws/bitnami/git:2.42.0
+FROM public.ecr.aws/bitnami/git:2.42.0-debian-11-r43
 
 LABEL "com.github.actions.name"="Mirror to GitLab"
 LABEL "com.github.actions.description"="Mirror branch and tag pushes to GitLab."
