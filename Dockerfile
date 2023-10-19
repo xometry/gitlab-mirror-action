@@ -7,4 +7,4 @@ LABEL "com.github.actions.color"="blue"
 
 COPY mirror.sh /mirror.sh
 COPY get-password.sh /get-password.sh
-ENTRYPOINT ["/bin/sh", "/mirror.sh"]
+ENTRYPOINT ["/bin/bash", "/mirror.sh"]
