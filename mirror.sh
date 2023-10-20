@@ -2,14 +2,12 @@
 
 set -euo pipefail
 
-echo "$GITHUB_EVENT_NAME"
+echo "Event Type: ""$GITHUB_EVENT_NAME"
 
 git config --global credential.username $GITLAB_USERNAME
 git config --global core.askPass /get-password.sh
 git config --global credential.helper cache
 git config --global --add safe.directory /github/workspace
-
-echo "entering decision tree"
 
 if test "$GITHUB_EVENT_NAME" == "create"; then
     # Do nothing. Every "create" event *also* publishes a *push* event, even tags/branches created from github UI.
@@ -24,8 +22,11 @@ elif test "$GITHUB_EVENT_NAME" == "workflow_run"; then
   git push mirror ${GITHUB_REF}:${GITHUB_REF} --force
   git remote remove mirror
 elif test "$GITHUB_EVENT_NAME" == "workflow_dispatch"; then
+  echo "remote add mirror"
   git remote add mirror ${GITLAB_REPOSITORY}
+  echo "push mirror"
   git push mirror ${GITHUB_REF}:${GITHUB_REF} --force
+  echo "remove mirror"
   git remote remove mirror
 elif test "$GITHUB_EVENT_NAME" == "delete"; then
   if test "$DELETED_REF_TYPE" == "tag"; then
