@@ -32,8 +32,11 @@ elif test "$GITHUB_EVENT_NAME" == "delete"; then
     echo "Unexpected DELETED_REF_TYPE=$DELETED_REF_TYPE, expected 'branch' or 'tag'"
     exit 1
   fi
+  echo "remote adding mirror"
   git remote add mirror ${GITLAB_REPOSITORY}
+  echo "push mirror"
   git push mirror :${FULL_DELETED_REF}
+  echo "remote remove mirror"
   git remote remove mirror
 else
   echo "Got unexpected GITHUB_EVENT_NAME: ${GITHUB_EVENT_NAME}"
