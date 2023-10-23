@@ -1,10 +1,13 @@
-#!/bin/sh
+#!/bin/bash
 
 set -euo pipefail
+
+echo "Event Type: ""$GITHUB_EVENT_NAME"
 
 git config --global credential.username $GITLAB_USERNAME
 git config --global core.askPass /get-password.sh
 git config --global credential.helper cache
+git config --global --add safe.directory /github/workspace
 
 if test "$GITHUB_EVENT_NAME" == "create"; then
     # Do nothing. Every "create" event *also* publishes a *push* event, even tags/branches created from github UI.
