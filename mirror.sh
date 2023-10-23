@@ -22,11 +22,8 @@ elif test "$GITHUB_EVENT_NAME" == "workflow_run"; then
   git push mirror ${GITHUB_REF}:${GITHUB_REF} --force
   git remote remove mirror
 elif test "$GITHUB_EVENT_NAME" == "workflow_dispatch"; then
-  echo "remote add mirror"
   git remote add mirror ${GITLAB_REPOSITORY}
-  echo "push mirror"
   git push mirror ${GITHUB_REF}:${GITHUB_REF} --force --verbose
-  echo "remove mirror"
   git remote remove mirror
 elif test "$GITHUB_EVENT_NAME" == "delete"; then
   if test "$DELETED_REF_TYPE" == "tag"; then
