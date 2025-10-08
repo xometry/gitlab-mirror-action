@@ -20,5 +20,6 @@ COPY get-password.sh /get-password.sh
 RUN chmod +x /mirror.sh /get-password.sh
 ENV HOME=/home/nonroot
 RUN mkdir -p /home/nonroot && chown -R 65532:65532 /home/nonroot
+RUN usermod -d /home/nonroot 65532
 USER 65532
 ENTRYPOINT ["/bin/bash", "/mirror.sh"]
