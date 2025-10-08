@@ -2,11 +2,6 @@
 
 set -euo pipefail
 
-if [ -d "/github/workspace" ]; then
-  echo "Changing ownership of /github/workspace to user 65532..."
-  chown -R 65532:65532 /github/workspace
-fi
-
 echo "Event Type: ""$GITHUB_EVENT_NAME"
 
 export HOME="/home/nonroot"
