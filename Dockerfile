@@ -19,8 +19,6 @@ COPY --from=dev /out/ /
 COPY mirror.sh /mirror.sh
 COPY get-password.sh /get-password.sh
 RUN chmod +x /mirror.sh /get-password.sh
-#ENV HOME=/home/nonroot
-#RUN adduser -D -u 65532 -h /home/nonroot nonroot
-#RUN chown -R 65532:65532 /home/nonroot
+# user 1001 is the runner user that GHA uses to run actions. As long as the container runs scripts as this user we wont have any permissions issues
 USER 1001
 ENTRYPOINT ["/bin/bash", "/mirror.sh"]
