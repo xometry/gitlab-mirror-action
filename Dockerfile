@@ -5,8 +5,7 @@ RUN mkdir -p /out && apk --update-cache --no-cache --root /out --initdb \
   --keys-dir /etc/apk/keys \
   --repositories-file /etc/apk/repositories \
   add bash busybox git ca-certificates
-RUN mkdir -p /home/nonroot && chown -R 65532:65532 /home/nonroot
-RUN usermod -d /home/nonroot 65532
+
 
 FROM 694713800774.dkr.ecr.us-east-2.amazonaws.com/golden/glibc-dynamic:15.2.0
 
@@ -21,7 +20,7 @@ COPY mirror.sh /mirror.sh
 COPY get-password.sh /get-password.sh
 RUN chmod +x /mirror.sh /get-password.sh
 ENV HOME=/home/nonroot
-#RUN mkdir -p /home/nonroot && chown -R 65532:65532 /home/nonroot
-#RUN usermod -d /home/nonroot 65532
+RUN adduser -D -u 65532 -h /home/nonroot nonroot
+RUN chown -R 65532:65532 /home/nonroot
 USER 65532
 ENTRYPOINT ["/bin/bash", "/mirror.sh"]
