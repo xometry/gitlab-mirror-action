@@ -4,6 +4,8 @@ set -euo pipefail
 
 echo "Event Type: ""$GITHUB_EVENT_NAME"
 
+export HOME="/home/nonroot"
+
 git config --global credential.username $GITLAB_USERNAME
 git config --global core.askPass /get-password.sh
 git config --global credential.helper cache
